@@ -1,40 +1,63 @@
 #!/usr/bin/env node
 
+require('dotenv').config();
 const colors = require('colors');
-const greet = require("../lib/greet");
+var Twitter = require('twitter-js-client').Twitter;
 
-// get arguments after first two elements in process.argv
-var arguments = process.argv.splice(2);
 
-// check if user want language specific greeting
-// default value of language is `null`
-var lang = null;
+var error = function (err, response, body) {
+    console.log('ERROR [%s]', err);
+    console.log(response);
+    console.log(body);
+    
+};
 
-// check if first argument is `--lang`
-if (arguments[0] == '--lang') {
-    // set second argument as language.
-    lang = arguments[1];
+var Twitter = require('twitter-js-client').Twitter;
+
+//Get this data from your twitter apps dashboard
+var config = {
+    "consumerKey": process.env.TWITTER_CONSUMER_KEY,
+    "consumerSecret": process.env.TWITTER_CONSUMER_SECRET,
+    "accessToken": process.env.TWITTER_ACCESS_TOKEN_KEY,
+    "accessTokenSecret": process.env.TWITTER_ACCESS_TOKEN_SECRET
 }
 
+var twitter = new Twitter(config);
 
-// if `lang` is empty, then show random greeting
-if (lang) {
-    // print random greeting
-    console.log(
-        // wraps text with rainbow color formatting
-        colors.rainbow(
-            // returns the greeting text with specified language
-            greet.greet(lang)
-        )
-    );
+class Tweet {
+    constructor(data) {
+        this.data = data;
+    }
+
+    print() {
+        console.log(this.data.text);
+        
+    }
 }
-else {
-    // print random greeting
-    console.log(
-        // wraps text with rainbow color formatting
-        colors.rainbow(
-            // returns the random greeting text
-            greet.greetRandom()
-        )
-    );
+
+class TweetManager {
+
+    
+    constructor() {
+        this.tweets = [];
+    }
+
+    add(tweet) {
+        this.tweets.push(tweet);
+        tweet.print();
+    }
 }
+
+tweets = [];
+tweetManager = new TweetManager();
+
+function refreshTL() {
+    twitter.getHomeTimeline({ screen_name: 'mr_m0nkey_', count: '2'}, error, function (data) {
+        response = JSON.parse(data);
+        response.forEach(tweet => {
+            tweets.push(tweetManager.add(new Tweet(tweet)));
+        });
+    });
+}    
+
+refreshTL();
