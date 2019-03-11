@@ -9,7 +9,6 @@ const program = require('commander');
 
 
 tweets = [];
-userManager = new UserManager();
 tweetLimit = 1;
 
 program
