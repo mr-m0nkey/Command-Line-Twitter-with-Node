@@ -2,23 +2,53 @@
 
 const { UserManager } = require('../lib/UserManager');
 const refreshTL = require('../lib/refreshTL');
+const login = require('../lib/login');
 const colors = require('colors');
 const program = require('commander');
-
-
-tweets = [];
-tweetLimit = 1;
-
-refreshTL(tweetLimit);
+const { prompt } = require('inquirer');
 
 
 program
-    .command('refresh') // sub-command name
-    .alias('rfsh') // alternative sub-command is `al`
-    .description('Gets a new bath of tweets from your timeline') // command description
+  .version('1.0.0')
+  .description('Twitter client on the terminal');
 
-    // function to execute when command is uses
-    .action(function () {
-        refreshTL();
-});
 
+
+
+  const loginPrompt = [
+    {
+      type : 'input',
+      name : 'username',
+      message : 'Enter Username ...'
+    },
+    {
+      type : 'password',
+      name : 'password',
+      message : 'Enter password ...'
+    },
+    
+  ];
+
+
+//Registering commands
+program
+  .command('login') 
+  .alias('l')
+  .description('Login to twitter')
+  .action(() => {
+    prompt(loginPrompt).then(loginCredentials =>
+      login(loginCredentials));
+  });
+
+
+program
+    .command('refresh [tweetLimit]') 
+    .alias('rfsh') 
+    .description('Gets a new batch of tweets from your timeline') 
+    .action((tweetLimit) => {        
+        refreshTL(tweetLimit);
+      });
+
+
+
+      program.parse(process.argv);

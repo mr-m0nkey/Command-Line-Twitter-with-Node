@@ -1,7 +1,7 @@
 {
   "name": "Command-Line-Twitter-with-Node",
   "version": "1.0.0",
-  "description": "Node version of the command line twitter project",
+  "description": "Twitter client on the terminal",
   "main": "./lib/greet.js",
   "bin": {
     "cltwitter": "./bin/index.js"
