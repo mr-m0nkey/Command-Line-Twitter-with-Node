@@ -6,10 +6,11 @@ const colors = require('colors');
 const program = require('commander');
 
 
-
-
 tweets = [];
 tweetLimit = 1;
+
+refreshTL(tweetLimit);
+
 
 program
     .command('refresh') // sub-command name
@@ -20,3 +21,4 @@ program
     .action(function () {
         refreshTL();
 });
+
