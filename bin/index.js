@@ -3,6 +3,7 @@
 const { UserManager } = require('../lib/UserManager');
 const refreshTL = require('../lib/refreshTL');
 const post = require('../lib/post');
+const stream = require('../lib/stream');
 const login = require('../lib/login');
 const colors = require('colors');
 const program = require('commander');
@@ -13,6 +14,8 @@ const { prompt } = require('inquirer');
 program
   .version('1.0.0')
   .description('Twitter client on the terminal');
+
+
 
 
 
@@ -69,6 +72,23 @@ program
         post(tweetBody.tweet));
     });
 
+
+const streamPrompt = [
+  {
+    type : 'input',
+    name : 'keyword',
+    message : 'Enter keyword ...'
+  },
+];
+
+program
+    .command('stream') 
+    //.alias('p')
+    .description('tweet stream')
+    .action(() => {
+      prompt(streamPrompt).then(streamBody =>
+        stream(streamBody.keyword));
+    });
 
 
 
