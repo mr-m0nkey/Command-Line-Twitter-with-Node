@@ -23,8 +23,12 @@
     "type": "git",
     "url": "git+https://github.com/mr-m0nkey/Command-Line-Twitter-with-Node.git"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "twitter",
+    "terminal",
+    "command line"
+  ],
+  "author": "Mr Monkey <mayowaaj69@hotmail.co.uk> (https://twitter.com/jar_of_code)",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/mr-m0nkey/Command-Line-Twitter-with-Node/issues"
