@@ -2,6 +2,7 @@
 
 const { UserManager } = require('../lib/UserManager');
 const refreshTL = require('../lib/refreshTL');
+const post = require('../lib/post');
 const login = require('../lib/login');
 const colors = require('colors');
 const program = require('commander');
@@ -50,5 +51,14 @@ program
       });
 
 
+program
+    .command('post [tweet]') 
+    .alias('update') 
+    .description('Posts a tweet to your timeline') 
+    .action((tweet) => {        
+      post(tweet);
+    });
 
-      program.parse(process.argv);
+
+
+program.parse(process.argv);
