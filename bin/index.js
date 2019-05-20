@@ -49,7 +49,7 @@ program
     .description('Gets a new batch of tweets from your timeline') 
     .action((tweetLimit) => {        
         refreshTL(tweetLimit);
-      });
+    });
 
 
 program
