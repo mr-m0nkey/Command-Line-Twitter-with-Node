@@ -17,20 +17,19 @@ program
 
 
 
-  const loginPrompt = [
-    {
-      type : 'input',
-      name : 'username',
-      message : 'Enter Username ...'
-    },
-    {
-      type : 'password',
-      name : 'password',
-      message : 'Enter password ...'
-    },
-    
-  ];
-
+const loginPrompt = [
+  {
+    type : 'input',
+    name : 'username',
+    message : 'Enter Username ...'
+  },
+  {
+    type : 'password',
+    name : 'password',
+    message : 'Enter password ...'
+  },
+  
+];
 
 //Registering commands
 program
@@ -52,13 +51,24 @@ program
     });
 
 
+
+const tweetPrompt = [
+  {
+    type : 'input',
+    name : 'tweet',
+    message : 'Type your tweet ...'
+  },
+];
+
 program
-    .command('post [tweet]') 
-    .alias('update') 
-    .description('Posts a tweet to your timeline') 
-    .action((tweet) => {        
-      post(tweet);
+    .command('post') 
+    .alias('p')
+    .description('Posts a tweet to your timeline')
+    .action(() => {
+      prompt(tweetPrompt).then(tweetBody =>
+        post(tweetBody.tweet));
     });
+
 
 
 
