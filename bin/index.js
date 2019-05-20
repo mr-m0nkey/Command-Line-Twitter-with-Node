@@ -8,6 +8,7 @@ const colors = require('colors');
 const program = require('commander');
 const { prompt } = require('inquirer');
 
+//TODO store global twitter paths
 
 program
   .version('1.0.0')

@@ -12,7 +12,7 @@
     "dotenv": "^6.2.0",
     "inquirer": "^6.2.2",
     "lodash": "^4.17.11",
-    "twitter-js-client": "0.0.5"
+    "twitter": "^1.7.1"
   },
   "devDependencies": {},
   "scripts": {
