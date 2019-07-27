@@ -4,6 +4,7 @@ const { UserManager } = require('../lib/UserManager');
 const refreshTL = require('../lib/refreshTL');
 const post = require('../lib/post');
 const stream = require('../lib/stream');
+const retweet = require('../lib/retweet');
 const login = require('../lib/login');
 const colors = require('colors');
 const program = require('commander');
@@ -11,13 +12,10 @@ const { prompt } = require('inquirer');
 
 //TODO store global twitter paths
 
+
 program
   .version('1.0.0')
   .description('Twitter client on the terminal');
-
-
-
-
 
 
 const loginPrompt = [
@@ -83,11 +81,29 @@ const streamPrompt = [
 
 program
     .command('stream') 
-    //.alias('p')
+    .alias('s')
     .description('tweet stream')
     .action(() => {
       prompt(streamPrompt).then(streamBody =>
         stream(streamBody.keyword));
+    });
+
+    const tweetInteractionPrompt = [
+      {
+        type : 'input',
+        name : 'id',
+        message : 'Enter tweet id ...'
+      },
+    ];
+
+
+  program
+    .command('retweet') 
+    .alias('rtwt')
+    .description('retweet a tweet')
+    .action(() => {
+      prompt(tweetInteractionPrompt).then(tweetDetails =>
+        retweet(tweetDetails.id));
     });
 
 
